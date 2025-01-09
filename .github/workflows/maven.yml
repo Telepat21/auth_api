@@ -49,7 +49,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Start API server
-      run: ./gradlew build &
+      run: ./gradlew bootRun &
       env:
           SERVER_PORT: 8083
         
