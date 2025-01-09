@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - name: Checkout API Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Clone Test Repository
       run: | 
@@ -40,17 +40,18 @@ jobs:
         your_token: ${{ secrets.TEST_REPO_PAT }}
         
     - name: Set up JDK 17
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+        distribution: 'adopt'
 
     - name: Make Gradle wrapper executable
       run: chmod +x gradlew
 
     - name: Start API server
-      run: ./gradlew build
+      run: ./gradlew build &
+      env:
+          SERVER_PORT: 8083
         
     - name: Install Dependencies
       working-directory: ./auth-tests
