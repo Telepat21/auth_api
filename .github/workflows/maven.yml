@@ -19,6 +19,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13  # Use the desired PostgreSQL version
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: romanmaksymovych
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: auth_db
+
     steps:
     - name: Checkout API Repository
       uses: actions/checkout@v4
@@ -35,6 +45,27 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: Make Gradle wrapper executable
+      run: chmod +x gradlew
+
+    - name: Start API server
+      run: ./gradlew bootRun &
+      env:
+        SERVER_PORT: 8083  
+    - name: Wait for API to be ready
+      run: |
+        echo "Waiting for API to be ready..."
+        for i in {1..30}; do
+          if curl --silent http://localhost:8083/health | grep "UP"; then
+            echo "API is ready!"
+            exit 0
+          fi
+          echo "Waiting for API to start..."
+          sleep 5
+        done
+        echo "API did not start in time!"
+        exit 1
         
     - name: Install Dependencies
       working-directory: ./auth-tests
