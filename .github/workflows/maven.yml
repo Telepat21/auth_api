@@ -50,14 +50,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Start API server
-      run: ./gradlew bootRun &
-      env:
-        SERVER_PORT: 8083  
-    - name: Wait for API to be ready
-      run: |
-        echo "Waiting for API to be ready..."
-        echo "API is ready!"
-        exit 0
+      run: ./gradlew build
         
     - name: Install Dependencies
       working-directory: ./auth-tests
