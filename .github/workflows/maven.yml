@@ -64,7 +64,7 @@ jobs:
         sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
 
     - name: Run Flyway migrations
-      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=/resources/db/migration
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=/resources/db/migration/V1__20250108.sql
 
     - name: Check directory
       run: |
