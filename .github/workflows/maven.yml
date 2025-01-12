@@ -58,12 +58,13 @@ jobs:
       env:
         PGPASSWORD: postgres
 
-    - name: Run Flyway Migrations
-      run: ./gradlew flywayMigrate
-      env:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/auth_db
-        SPRING_DATASOURCE_USERNAME: romanmaksymovych
-        SPRING_DATASOURCE_PASSWORD: postgres
+    - name: Install Flyway
+      run: |
+        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.5.13/flyway-commandline-8.5.13-linux-x64.tar.gz | tar xvz
+        sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
+
+    - name: Run Flyway migrations
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=/resources/db/migration
 
     - name: Check directory
       run: |
