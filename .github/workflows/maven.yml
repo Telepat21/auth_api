@@ -50,11 +50,11 @@ jobs:
 
     - name: Initialize Database
       run: |
-        psql -h localhost -U romanmaksymovych -d auth_db -c "CREATE USER romanmaksymovych WITH PASSWORD 'postgres';"
-        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT CONNECT ON DATABASE auth_db TO romanmaksymovych;"
-        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT USAGE ON SCHEMA public TO romanmaksymovych;"
-        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO romanmaksymovych;"
-        psql -h localhost -U romanmaksymovych -d auth_db -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO romanmaksymovych;"
+        psql -h localhost -U romanmaksymovych -d auth_db -c "CREATE USER runner WITH PASSWORD 'postgres';"
+        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT CONNECT ON DATABASE auth_db TO runner;"
+        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT USAGE ON SCHEMA public TO runner;"
+        psql -h localhost -U romanmaksymovych -d auth_db -c "GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO runner;"
+        psql -h localhost -U romanmaksymovych -d auth_db -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO runner;"
       env:
         PGPASSWORD: postgres
 
