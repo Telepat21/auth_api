@@ -63,8 +63,13 @@ jobs:
         curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/9.17.0/flyway-commandline-9.17.0-linux-x64.tar.gz | tar xvz
         sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
 
+    - name: Check directory
+      run: |
+        ls -lsa $GITHUB_WORKSPACE/resources/db/migration
+        cat $GITHUB_WORKSPACE/resources/db/migration/V1__20250108.sql
+
     - name: Run Flyway migrations
-      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=/resources/db/migration/V1__20250108.sql
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=$GITHUB_WORKSPACE/resources/db/migration/V1__20250108.sql
 
     - name: Check directory
       run: |
