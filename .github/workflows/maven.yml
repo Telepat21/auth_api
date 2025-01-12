@@ -61,6 +61,21 @@ jobs:
     #   env:
     #     SERVER_PORT: 8083
 
+    - name: Check PostgreSQL Connection
+      run: |
+        for i in {1..10}; do
+            if nc -zv localhost 5432; then
+              echo "PostgreSQL is up.";
+              break;
+            else
+              echo "Waiting for PostgreSQL...";
+              sleep 5;
+            fi
+        done
+        if ! nc -zv localhost 5432; then
+          echo "PostgreSQL did not start in time.";
+        fi
+
     - name: Check Database Connection
       run: |
         psql -h localhost -U romanmaksymovych -d auth_db -c '\dt'
@@ -79,22 +94,6 @@ jobs:
 
     - name: Print Server Logs
       run: cat server.log
-
-
-    - name: Check PostgreSQL Connection
-      run: |
-        for i in {1..10}; do
-            if nc -zv localhost 5432; then
-              echo "PostgreSQL is up.";
-              break;
-            else
-              echo "Waiting for PostgreSQL...";
-              sleep 5;
-            fi
-        done
-        if ! nc -zv localhost 5432; then
-          echo "PostgreSQL did not start in time.";
-        fi
     
     - name: Test Server Endpoint
       run: |
