@@ -106,15 +106,13 @@ jobs:
 
     - name: Start API server
       run: 
-        ./gradlew bootRun &
+        ./gradlew bootRun --stacktrace &
         sleep 30  # Wait for server to start
       env:
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/auth_db
         SPRING_DATASOURCE_USERNAME: runner
         SPRING_DATASOURCE_PASSWORD: postgres
         SERVER_PORT: 8083
-        ACTIONS_RUNNER_DEBUG: true
-        ACTIONS_STEP_DEBUG: true
 
     - name: Print Server Logs
       run: cat server.log
