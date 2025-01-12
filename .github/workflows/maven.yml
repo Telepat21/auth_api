@@ -53,10 +53,37 @@ jobs:
         ls -lsa $GITHUB_WORKSPACE/ 
         cat $GITHUB_WORKSPACE/gradlew
       
+    # - name: Start API server
+    #   run: ./gradlew bootRun
+
     - name: Start API server
-      run: ./gradlew bootRun &
+      run: ./gradlew bootRun > server.log 2>&1 &
       env:
-          SERVER_PORT: 8083
+        SERVER_PORT: 8083
+
+    - name: Print Server Logs
+      run: cat server.log
+
+
+    - name: Check PostgreSQL Connection
+      run: |
+        for i in {1..10}; do
+            if nc -zv localhost 5432; then
+              echo "PostgreSQL is up.";
+              break;
+            else
+              echo "Waiting for PostgreSQL...";
+              sleep 5;
+            fi
+        done
+        if ! nc -zv localhost 5432; then
+          echo "PostgreSQL did not start in time.";
+          exit 1;
+        fi
+    
+    - name: Test Server Endpoint
+      run: |
+        curl -f http://localhost:8083/health || exit 1
           
     - name: Wait for Server to Start
       run: |
