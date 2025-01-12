@@ -52,6 +52,22 @@ jobs:
       run: ./gradlew bootRun &
       env:
           SERVER_PORT: 8083
+          
+    - name: Wait for Server to Start
+      run: |
+        for i in {1..10}; do
+            if nc -zv localhost 8083; then
+                echo "Server is up on port 8083.";
+                break;
+            else  
+                echo "Waiting for server to start...";
+                sleep 5;
+            fi
+        done
+        if ! nc -zv localhost 8083; then
+            echo "Server did not start on port 8083 in time.";
+            exit 1;
+        fi
         
     - name: Install Dependencies
       working-directory: ./auth-tests
