@@ -33,10 +33,6 @@ jobs:
     - name: Checkout API Repository
       uses: actions/checkout@v3
 
-    - name: Run Flyway migrations
-      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=./resources/db/migration
-      
-
     - name: Clone Test Repository
       run: | 
         git clone https://github.com/Telepat21/auth-tests.git
@@ -61,6 +57,13 @@ jobs:
         psql -h localhost -U romanmaksymovych -d auth_db -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO runner;"
       env:
         PGPASSWORD: postgres
+
+    - name: Run Flyway Migrations
+      run: ./gradlew flywayMigrate
+      env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/auth_db
+        SPRING_DATASOURCE_USERNAME: romanmaksymovych
+        SPRING_DATASOURCE_PASSWORD: postgres
 
     - name: Check directory
       run: |
