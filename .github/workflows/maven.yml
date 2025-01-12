@@ -117,9 +117,6 @@ jobs:
         SPRING_DATASOURCE_USERNAME: runner
         SPRING_DATASOURCE_PASSWORD: postgres
         SERVER_PORT: 8083
-
-    - name: Print Server Logs
-      run: cat server.log
     
     - name: Test Server Endpoint
       run: |
