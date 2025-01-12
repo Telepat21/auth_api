@@ -9,9 +9,11 @@ spring:
     password: postgres
   flyway:
     url: jdbc:postgresql://localhost:5432/auth_db
+    user: romanmaksymovych
     locations: classpath:db/migration
     baseline-on-migrate: true
     enabled: true
+    password: postgres
 
 jwt:
   password:
