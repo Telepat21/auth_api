@@ -5,7 +5,7 @@ server:
 spring:
   r2dbc:
     url: r2dbc:pool:postgres://localhost:5432/auth_db
-    username: runner
+    username: romanmaksymovych
     password: postgres
   flyway:
     url: jdbc:postgresql://localhost:5432/auth_db
