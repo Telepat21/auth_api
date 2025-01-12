@@ -33,6 +33,14 @@ jobs:
     - name: Checkout API Repository
       uses: actions/checkout@v3
 
+    - name: Install Flyway
+      run: |
+        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.5.13/flyway-commandline-8.5.13-linux-x64.tar.gz | tar xvz
+        sudo ln -s `pwd`/flyway-8.5.13/flyway /usr/local/bin
+
+    - name: Run Flyway migrations
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres
+
     - name: Clone Test Repository
       run: | 
         git clone https://github.com/Telepat21/auth-tests.git
