@@ -50,8 +50,8 @@ jobs:
 
     - name: Install Flyway
       run: |
-        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/9.17.0/flyway-commandline-9.17.0-linux-x64.tar.gz | tar xvz
-        sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
+        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/9.22.0/flyway-commandline-9.22.0-linux-x64.tar.gz | tar xvz
+        sudo ln -s `pwd`/flyway-9.22.0/flyway /usr/local/bin
 
     - name: Run chmod
       run: chmod +x $GITHUB_WORKSPACE/src/main/resources/db/migration/V1__20250108.sql
