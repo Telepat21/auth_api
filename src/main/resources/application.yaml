@@ -11,6 +11,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/auth_db
     locations: classpath:db/migration
     baseline-on-migrate: true
+    enabled: true
 
 jwt:
   password:
