@@ -68,7 +68,7 @@ jobs:
         sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
 
     - name: Run Flyway migrations
-      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=runner -password=postgres -locations=$GITHUB_WORKSPACE/src/main/resources/db/migrations/ -X
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=runner -password=postgres -locations=$GITHUB_WORKSPACE/src/main/resources/db/migrations/V1__20250108.sql -X
     - name: Check directory
       run: |
         ls -lsa $GITHUB_WORKSPACE/ 
