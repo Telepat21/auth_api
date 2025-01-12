@@ -61,6 +61,12 @@ jobs:
     #   env:
     #     SERVER_PORT: 8083
 
+    - name: Check Database Connection
+      run: |
+        psql -h localhost -U romanmaksymovych -d auth_db -c '\dt'
+      env:
+        PGPASSWORD: postgres
+
     - name: Start API server
       run: 
         ./gradlew bootRun &
