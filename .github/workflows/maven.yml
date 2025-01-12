@@ -21,7 +21,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13  # Use the desired PostgreSQL version
+        image: postgres:latest  # Use the desired PostgreSQL version
         ports:
           - 5432:5432
         env:
