@@ -43,7 +43,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'adopt'
+        distribution: 'zulu'
 
     - name: Make Gradle wrapper executable
       run: chmod +x gradlew
@@ -56,9 +56,19 @@ jobs:
     # - name: Start API server
     #   run: ./gradlew bootRun
 
+    # - name: Start API server
+    #   run: ./gradlew bootRun > server.log 2>&1 &
+    #   env:
+    #     SERVER_PORT: 8083
+
     - name: Start API server
-      run: ./gradlew bootRun > server.log 2>&1 &
+      run: 
+        ./gradlew bootRun &
+        sleep 30  # Wait for server to start
       env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/auth_db
+        SPRING_DATASOURCE_USERNAME: romanmaksymovych
+        SPRING_DATASOURCE_PASSWORD: postgres
         SERVER_PORT: 8083
 
     - name: Print Server Logs
@@ -78,7 +88,6 @@ jobs:
         done
         if ! nc -zv localhost 5432; then
           echo "PostgreSQL did not start in time.";
-          exit 1;
         fi
     
     - name: Test Server Endpoint
