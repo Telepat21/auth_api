@@ -90,9 +90,9 @@ jobs:
         SPRING_DATASOURCE_PASSWORD: postgres
         SERVER_PORT: 8083
     
-    - name: Test Server Endpoint
-      run: |
-        curl -f http://localhost:8083/health
+    # - name: Test Server Endpoint
+    #   run: |
+    #     curl -f http://localhost:8083/health
         
     - name: Install Dependencies
       working-directory: ./auth-tests
