@@ -48,6 +48,11 @@ jobs:
     - name: Make Gradle wrapper executable
       run: chmod +x gradlew
 
+    - name: Check directory
+      run: |
+        ls -lsa $GITHUB_WORKSPACE/ 
+        cat $GITHUB_WORKSPACE/gradlew
+      
     - name: Start API server
       run: ./gradlew bootRun &
       env:
