@@ -60,7 +60,7 @@ jobs:
 
     - name: Install Flyway
       run: |
-        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.5.13/flyway-commandline-8.5.13-linux-x64.tar.gz | tar xvz
+        curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/9.17.0/flyway-commandline-9.17.0-linux-x64.tar.gz | tar xvz
         sudo ln -s `pwd`/flyway-9.17.0/flyway /usr/local/bin
 
     - name: Run Flyway migrations
