@@ -68,7 +68,7 @@ jobs:
         ls -lsa $GITHUB_WORKSPACE/src/main/resources/db/migration/
 
     - name: Run Flyway migrations
-      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=romanmaksymovych -password=postgres -locations=$GITHUB_WORKSPACE/src/main/resources/db/migration/V1__20250108.sql
+      run: flyway migrate -url=jdbc:postgresql://localhost:5432/auth_db -user=runner -password=postgres -locations=$GITHUB_WORKSPACE/src/main/resources/db/migration/V1__20250108.sql
 
     - name: Check directory
       run: |
