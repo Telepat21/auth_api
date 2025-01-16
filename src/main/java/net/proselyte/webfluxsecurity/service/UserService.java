@@ -39,4 +39,8 @@ public class UserService {
     public Mono<UserEntity> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+//    public Mono<UserEntity> updateUser(UserEntity user) {
+//        return userRepository.save(user);
+//    }
 }

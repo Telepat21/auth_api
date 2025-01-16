@@ -6,7 +6,6 @@ import net.proselyte.webfluxsecurity.dto.AuthResponseDto;
 import net.proselyte.webfluxsecurity.dto.UserDto;
 import net.proselyte.webfluxsecurity.entity.UserEntity;
 import net.proselyte.webfluxsecurity.mapper.UserMapper;
-import net.proselyte.webfluxsecurity.repository.UserRepository;
 import net.proselyte.webfluxsecurity.secutiry.CustomPrincipal;
 import net.proselyte.webfluxsecurity.secutiry.SecurityService;
 import net.proselyte.webfluxsecurity.service.UserService;
@@ -49,4 +48,15 @@ public class AuthRestControllerV1 {
         return userService.getUserById(customPrincipal.getId())
                 .map(userMapper::map);
     }
+
+//    @PatchMapping("/update")
+//    public Mono<UserEntity> update(@RequestBody UserDto dto) {
+//        return  userService.getUserById(dto.getId())
+//                .flatMap(existingUser -> {
+//                    existingUser.setUsername(dto.getUsername());
+//                    existingUser.setFirstName(dto.getFirstName());
+//                    existingUser.setLastName(dto.getLastName());
+//                    return userService.updateUser(existingUser);
+//                });
+//    }
 }
