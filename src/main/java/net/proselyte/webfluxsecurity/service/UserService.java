@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public Mono<UserEntity> updateUser(UserEntity user) {
-        return userRepository.save(user);
-    }
+//    public Mono<UserEntity> updateUser(UserEntity user) {
+//        return userRepository.save(user);
+//    }
 }

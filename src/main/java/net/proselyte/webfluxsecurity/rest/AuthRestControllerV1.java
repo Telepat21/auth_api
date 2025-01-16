@@ -49,14 +49,14 @@ public class AuthRestControllerV1 {
                 .map(userMapper::map);
     }
 
-    @PatchMapping("/update")
-    public Mono<UserEntity> update(@RequestBody UserDto dto) {
-        return  userService.getUserById(dto.getId())
-                .flatMap(existingUser -> {
-                    existingUser.setUsername(dto.getUsername());
-                    existingUser.setFirstName(dto.getFirstName());
-                    existingUser.setLastName(dto.getLastName());
-                    return userService.updateUser(existingUser);
-                });
-    }
+//    @PatchMapping("/update")
+//    public Mono<UserEntity> update(@RequestBody UserDto dto) {
+//        return  userService.getUserById(dto.getId())
+//                .flatMap(existingUser -> {
+//                    existingUser.setUsername(dto.getUsername());
+//                    existingUser.setFirstName(dto.getFirstName());
+//                    existingUser.setLastName(dto.getLastName());
+//                    return userService.updateUser(existingUser);
+//                });
+//    }
 }
